@@ -3,10 +3,10 @@ package pl.pwojcik.patterns.observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectImpl implements Subject {
+public class SecondSubject implements Subject {
 
     private List<Observer> observers = new ArrayList<Observer>();
-    private int flag;
+    private int value;
 
     public void register(Observer observer) {
         observers.add(observer);
@@ -16,18 +16,19 @@ public class SubjectImpl implements Subject {
         observers.remove(observer);
     }
 
-    public void notifyObservers() {
+    public void notifyObservers(int updatedValue) {
         for(Observer observer : observers) {
-            observer.update();
+            observer.update(this.getClass().getSimpleName(), updatedValue);
         }
     }
 
-    public int getFlag() {
-        return flag;
+    public int getValue() {
+        return value;
     }
 
-    public void setFlag(int flag) {
-        this.flag = flag;
-        notifyObservers();
+    public void setValue(int value) {
+        this.value = value;
+        notifyObservers(value);
     }
+
 }

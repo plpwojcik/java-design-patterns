@@ -1,8 +1,6 @@
 package pl.pwojcik.patterns.observer;
 
-class Observer {
+public interface Observer {
 
-    void update() {
-        System.out.println("Flag value changed in Subject");
-    }
+    void update(String s, int i);
 }
