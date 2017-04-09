@@ -6,15 +6,30 @@ public class ObserverPatternTest {
 
     @Test
     public void observerPatternTest() {
-        Observer o = new Observer();
-        Subject sub = new SubjectImpl();
-        sub.register(o);
-        System.out.println("Setting Flag = 5 ");
-        sub.notifyObservers();
-        System.out.println("Setting Flag = 25 ");
-        sub.notifyObservers();
-        sub.unregister(o);
-        System.out.println("Setting Flag = 50 ");
-        sub.notifyObservers();
+        FirstSubject firstSubject = new FirstSubject();
+        SecondSubject secondSubject = new SecondSubject();
+
+        FirstObserver firstObserver = new FirstObserver();
+        SecondObserver secondObserver = new SecondObserver();
+        ThirdObserver thirdObserver = new ThirdObserver();
+
+        firstSubject.register(firstObserver);
+        firstSubject.register(secondObserver);
+
+        secondSubject.register(secondObserver);
+        secondSubject.register(thirdObserver);
+
+        firstSubject.setValue(50);
+        System.out.println();
+
+        secondSubject.setValue(50);
+        System.out.println();
+
+        firstSubject.unregister(secondObserver);
+
+        firstSubject.setValue(550);
+        System.out.println();
+
+        secondSubject.setValue(750);
     }
 }
